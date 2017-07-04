@@ -1,6 +1,6 @@
 "use strict";
 var express = require("express");
-var noticia_1 = require("./router/noticia");
+var cliente_1 = require("./router/cliente");
 exports.router = express.Router();
-exports.router.use('/noticias', noticia_1.noticia);
+exports.router.use('/clientes', cliente_1.cliente);
 //# sourceMappingURL=router.js.map
