@@ -11,11 +11,13 @@
   "license": "ISC",
   "dependencies": {
     "@types/bluebird": "^3.5.8",
+    "@types/http-status": "^0.2.29",
     "@types/http-status-codes": "^1.0.29",
     "@types/mongoose": "^4.7.18",
     "body-parser": "^1.17.2",
     "cors": "^2.8.3",
     "express": "^4.15.3",
+    "http-status": "^1.0.1",
     "http-status-codes": "^1.1.6",
     "mongoose": "^4.10.8"
   }

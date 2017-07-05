@@ -6,8 +6,16 @@ var controller = new cliente_1.Cliente();
 exports.cliente.get('/', function (request, response) {
     controller.list(request, response);
 });
+exports.cliente.get('/:id', function (request, response) {
+    controller.find(request, response);
+});
 exports.cliente.post('/', function (request, response) {
-    console.log("entrou no get router/cliente");
     controller.add(request, response);
+});
+exports.cliente.get('/nome/:nome', function (request, response) {
+    controller.findNome(request, response);
+});
+exports.cliente.put('/cliente/:cliente', function (request, response) {
+    controller.update(request, response);
 });
 //# sourceMappingURL=cliente.js.map

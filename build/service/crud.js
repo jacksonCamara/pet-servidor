@@ -6,9 +6,17 @@ var CRUD = (function () {
     CRUD.prototype.list = function () {
         return this.repository.list();
     };
-    CRUD.prototype.add = function (user) {
-        console.log("entrou nolist service/crud/cliente");
-        return this.repository.add(user);
+    CRUD.prototype.add = function (dado) {
+        return this.repository.add(dado);
+    };
+    CRUD.prototype.find = function (id) {
+        return this.repository.find(id);
+    };
+    CRUD.prototype.findNome = function (nome) {
+        return this.repository.findNome(nome);
+    };
+    CRUD.prototype.update = function (dado) {
+        return this.repository.update(dado);
     };
     return CRUD;
 }());

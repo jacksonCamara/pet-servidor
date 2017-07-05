@@ -1,30 +1,60 @@
 "use strict";
-var HttpStatus = require("http-status-codes");
-var error_1 = require("../repository/error");
+var response_handler_1 = require("../responses/response-handler");
 var CRUD = (function () {
-    function CRUD(service) {
+    function CRUD(service, tipo) {
+        this.responseHandler = new response_handler_1.ResponseHandler();
         this.service = service;
     }
     CRUD.prototype.list = function (request, response) {
-        var entities = this.service.list();
-        return response.json(entities);
+        var _this = this;
+        this.service.list()
+            .then(function (dado) {
+            _this.responseHandler.onSuccess(response, dado);
+        })
+            .catch(function (error) {
+            _this.responseHandler.onError(response, error, "Erro ao pesquisar " + _this.tipo);
+        });
     };
     CRUD.prototype.add = function (request, response) {
-        console.log("entrou no list controller/crud/cliente");
+        var _this = this;
         var entity = request.body;
-        return this.service.add(entity).then(function (ser) {
-            return response
-                .status(HttpStatus.CREATED)
-                .json(ser);
-        }).catch(function (error) {
-            if (error === error_1.Error.duplicateKey) {
-                return response
-                    .status(HttpStatus.BAD_REQUEST)
-                    .json("Entity has some duplicate unique key.");
-            }
-            return response
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json();
+        this.service.add(entity)
+            .then(function (dado) {
+            _this.responseHandler.onSuccess(response, dado);
+        })
+            .catch(function (error) {
+            _this.responseHandler.onError(response, error, "Erro ao adiciionar " + _this.tipo);
+        });
+    };
+    CRUD.prototype.find = function (request, response) {
+        var _this = this;
+        this.service.find(request.params.id)
+            .then(function (dado) {
+            _this.responseHandler.onSuccess(response, dado);
+        })
+            .catch(function (error) {
+            _this.responseHandler.onError(response, error, "Erro ao pesquisar " + _this.tipo);
+        });
+    };
+    CRUD.prototype.findNome = function (request, response) {
+        var _this = this;
+        this.service.findNome(request.params.nome)
+            .then(function (dado) {
+            _this.responseHandler.onSuccess(response, dado);
+        })
+            .catch(function (error) {
+            _this.responseHandler.onError(response, error, "Erro ao pesquisar " + _this.tipo);
+        });
+    };
+    CRUD.prototype.update = function (request, response) {
+        var _this = this;
+        var dado = request.body;
+        this.service.update(dado)
+            .then(function (dado) {
+            _this.responseHandler.onSuccess(response, dado);
+        })
+            .catch(function (error) {
+            _this.responseHandler.onError(response, error, "Erro ao pesquisar " + _this.tipo);
         });
     };
     return CRUD;

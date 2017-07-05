@@ -1,42 +1,26 @@
 "use strict";
-var error_1 = require("./error");
 var CRUD = (function () {
-    function CRUD(model, mapper) {
+    function CRUD(model) {
         this.model = model;
-        this.mapper = mapper;
     }
     CRUD.prototype.list = function () {
-        var _this = this;
-        //ClienteModel.
-        var documentsQuery = this.model.find();
-        return documentsQuery.exec().then(function (doc) {
-            return doc.map(_this.mapper.toEntity);
-        });
+        return this.model.find();
     };
     CRUD.prototype.find = function (id) {
-        var _this = this;
-        return this.model.findOne({ id: id }).then(function (doc) {
-            if (!doc) {
-                return undefined;
-            }
-            else {
-                return _this.mapper.toEntity(doc);
-            }
-        });
+        console.log("repository find Cliente");
+        console.log(id);
+        return this.model.findOne({ id: id });
     };
     CRUD.prototype.add = function (entity) {
-        var _this = this;
-        console.log("entrou nolist repository/crud/cliente");
-        console.log(entity);
-        return this.mapper.toDocument(entity).save().then(function (doc) {
-            console.log(doc);
-            var teste = _this.mapper.toEntity(doc);
-            console.log('=======================================');
-            console.log(teste);
-            return teste;
-        }).catch(function (error) {
-            throw error_1.Error.duplicateKey;
-        });
+        var cliente = new this.model(entity);
+        return cliente.save();
+    };
+    CRUD.prototype.findNome = function (nome) {
+        return this.model.find({ nome: nome });
+    };
+    CRUD.prototype.update = function (dado) {
+        console.log("repository update Cliente");
+        return this.model.findByIdAndUpdate(dado.id, dado);
     };
     return CRUD;
 }());

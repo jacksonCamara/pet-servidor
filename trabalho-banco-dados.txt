@@ -1,0 +1,13 @@
+referencia
+https://www.typescriptlang.org/docs/handbook/advanced-types.html
+http://mongoosejs.com/
+http://mongoosejs.com/docs/index.html
+
+######mongo
+*Um modelo é uma classe com qual construimos documentos
+
+
+
+
+###################typescript
+* Um tipo de interseção combina vários tipos em um. Isso permite que você adicione os tipos existentes para obter um único tipo que tenha todos os recursos que você precisa.  Isso significa que um objeto desse tipo terá todos os membros de todos os dois tipos.

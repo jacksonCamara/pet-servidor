@@ -9,10 +9,7 @@ var crud_1 = require("./crud");
 var Cliente = (function (_super) {
     __extends(Cliente, _super);
     function Cliente() {
-        var _this = this;
-        var service = new cliente_1.Cliente();
-        _this = _super.call(this, service) || this;
-        return _this;
+        return _super.call(this, new cliente_1.Cliente(), "Cliente") || this;
     }
     return Cliente;
 }(crud_1.CRUD));

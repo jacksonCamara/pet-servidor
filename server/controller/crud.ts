@@ -4,34 +4,67 @@ import * as HttpStatus from 'http-status-codes'
 import { Error as RepositoryError } from '../repository/error'
 import { CRUD as CRUDService } from '../service/crud'
 import { Entity } from '../entity/entity'
+import { ResponseHandler } from '../responses/response-handler';
 
 export class CRUD<TEntity extends Entity> {
-    constructor(
-        private readonly service: CRUDService<TEntity>
-    ) { }
+    private responseHandler: ResponseHandler;
+    private readonly service: CRUDService<TEntity>
+    private tipo: string;
 
-    public list(request: Request, response: Response) {
+    constructor(service: CRUDService<TEntity>, tipo: String) {
+        this.responseHandler = new ResponseHandler();
+        this.service = service;
+    }
 
-        const entities = this.service.list()
-        return response.json(entities)
+    public list(request: Request, response: Response): void {
+        this.service.list()
+            .then(dado => {
+                this.responseHandler.onSuccess(response, dado)
+            })
+            .catch(error => {
+                this.responseHandler.onError(response, error, `Erro ao pesquisar ${this.tipo}`)
+            })
     }
 
     public add(request: Request, response: Response) {
-        console.log("entrou no list controller/crud/cliente")
         let entity = request.body as TEntity
-        return this.service.add(entity).then(ser => {
-            return response
-                .status(HttpStatus.CREATED)
-                .json(ser)
-        }).catch(error => {
-            if (error === RepositoryError.duplicateKey) {
-                return response
-                    .status(HttpStatus.BAD_REQUEST)
-                    .json(`Entity has some duplicate unique key.`)
-            }
-            return response
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .json()
-        })
+        this.service.add(entity)
+            .then(dado => {
+                this.responseHandler.onSuccess(response, dado)
+            })
+            .catch(error => {
+                this.responseHandler.onError(response, error, `Erro ao adiciionar ${this.tipo}`)
+            })
+    }
+
+    public find(request: Request, response: Response): void {
+        this.service.find(request.params.id)
+            .then(dado => {
+                this.responseHandler.onSuccess(response, dado)
+            })
+            .catch(error => {
+                this.responseHandler.onError(response, error, `Erro ao pesquisar ${this.tipo}`)
+            })
+    }
+
+    public findNome(request: Request, response: Response): void {
+        this.service.findNome(request.params.nome)
+            .then(dado => {
+                this.responseHandler.onSuccess(response, dado)
+            })
+            .catch(error => {
+                this.responseHandler.onError(response, error, `Erro ao pesquisar ${this.tipo}`)
+            })
+    }
+
+    public update(request: Request, response: Response): void {
+        const dado = request.body as TEntity;
+        this.service.update(dado)
+            .then(dado => {
+                this.responseHandler.onSuccess(response, dado)
+            })
+            .catch(error => {
+                this.responseHandler.onError(response, error, `Erro ao pesquisar ${this.tipo}`)
+            })
     }
 }

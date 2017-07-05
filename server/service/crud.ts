@@ -5,18 +5,28 @@ import { Error } from '../repository/error'
 
 
 export class CRUD<TEntity extends Entity> {
-    constructor(
-        private readonly repository: CrudRepository<TEntity>
-    ) { }
 
+    constructor(private readonly repository: CrudRepository<TEntity>) { }
 
-    list(): Promise<TEntity[]> {
+    public list(): Promise<TEntity[]> {
         return this.repository.list();
     }
 
-    add(user: TEntity): Promise<TEntity> {
-        console.log("entrou nolist service/crud/cliente")
-        return this.repository.add(user)
+    public add(dado: TEntity): Promise<TEntity> {
+        return this.repository.add(dado)
+    }
+
+    public find(id: number): Promise<TEntity | undefined> {
+        return this.repository.find(id)
+    }
+
+
+    public findNome(nome: string): Promise<TEntity[]> {
+        return this.repository.findNome(nome)
+    }
+
+    public update(dado: TEntity): Promise<TEntity[]> {
+        return this.repository.update(dado)
     }
 
 }
