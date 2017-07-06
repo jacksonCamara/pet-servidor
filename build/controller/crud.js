@@ -9,6 +9,8 @@ var CRUD = (function () {
         var _this = this;
         this.service.list()
             .then(function (dado) {
+            //   const clienteViewModel = new ClienteInterface();
+            //  const teste = clienteViewModel.createClientes(dado);
             _this.responseHandler.onSuccess(response, dado);
         })
             .catch(function (error) {

@@ -3,21 +3,23 @@ var mongoose_1 = require("mongoose");
 var EnderecoSchema = new mongoose_1.Schema({
     rua: { type: String },
     numeroResidencia: { type: String },
+    bloco: { type: String },
+    apartamento: { type: String },
+    complemento: { type: String },
+    edificio: { type: String },
     bairro: { type: String },
     cidade: { type: String },
-    estado: { type: String },
+    uf: { type: String },
+    pontoReferencia: { type: String },
 });
 var TelefoneSchema = new mongoose_1.Schema({
     numero: { type: String }
 });
 var schema = new mongoose_1.Schema({
-    id: {
-        type: String,
-        unique: true
-    },
     nome: { type: String },
-    email: { type: String },
-    password: { type: String },
+    cpf: { type: String },
+    sexo: { type: String },
+    dataNascimento: { type: String },
     telefones: [TelefoneSchema],
     enderecos: [EnderecoSchema]
 });

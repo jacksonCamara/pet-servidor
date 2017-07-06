@@ -4,7 +4,7 @@ var ResponseHandler = (function () {
     function ResponseHandler() {
     }
     ResponseHandler.prototype.onSuccess = function (res, data) {
-        res.status(HTTPStatus.OK).json({ payload: data });
+        res.status(HTTPStatus.OK).json(data);
     };
     ResponseHandler.prototype.onError = function (res, err, message) {
         console.log("Error: " + err);

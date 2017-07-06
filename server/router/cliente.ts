@@ -5,6 +5,7 @@ export const cliente = Router()
 const controller = new ClienteController()
 
 cliente.get('/', (request, response) => {
+    console.log("entrou no router cliente")
     controller.list(request, response)
 })
 
@@ -13,6 +14,7 @@ cliente.get('/:id', (request, response) => {
 })
 
 cliente.post('/', (request, response) => {
+    console.log("entrou no post do servidor")
     controller.add(request, response)
 })
 

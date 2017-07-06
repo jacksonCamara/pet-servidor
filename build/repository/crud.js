@@ -9,7 +9,7 @@ var CRUD = (function () {
     CRUD.prototype.find = function (id) {
         console.log("repository find Cliente");
         console.log(id);
-        return this.model.findOne({ id: id });
+        return this.model.findOne({ _id: id });
     };
     CRUD.prototype.add = function (entity) {
         var cliente = new this.model(entity);

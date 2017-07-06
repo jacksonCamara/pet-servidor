@@ -4,7 +4,7 @@ import * as HTTPStatus from 'http-status';
 export class ResponseHandler {
 
     public onSuccess(res: Response, data: any) {
-        res.status(HTTPStatus.OK).json({ payload: data });
+        res.status(HTTPStatus.OK).json(data);
     }
 
     public onError(res: Response,  err: any, message: string,) {

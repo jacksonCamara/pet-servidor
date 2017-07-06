@@ -15,7 +15,7 @@ export class CRUD<TEntity extends Entity> {
     public find(id: number): Promise<TEntity | undefined> {
         console.log("repository find Cliente")
         console.log(id)
-        return this.model.findOne({ id: id })
+        return this.model.findOne({_id: id })
     }
 
     public add(entity: TEntity): Promise<TEntity> {

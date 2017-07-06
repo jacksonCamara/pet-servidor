@@ -5,6 +5,7 @@ import { Error as RepositoryError } from '../repository/error'
 import { CRUD as CRUDService } from '../service/crud'
 import { Entity } from '../entity/entity'
 import { ResponseHandler } from '../responses/response-handler';
+import { ClienteInterface } from '../view-model/cliente-view-model'
 
 export class CRUD<TEntity extends Entity> {
     private responseHandler: ResponseHandler;
@@ -19,6 +20,8 @@ export class CRUD<TEntity extends Entity> {
     public list(request: Request, response: Response): void {
         this.service.list()
             .then(dado => {
+            //   const clienteViewModel = new ClienteInterface();
+              //  const teste = clienteViewModel.createClientes(dado);
                 this.responseHandler.onSuccess(response, dado)
             })
             .catch(error => {
