@@ -14,7 +14,6 @@ cliente.get('/:id', (request, response) => {
 })
 
 cliente.post('/', (request, response) => {
-    console.log("entrou no post do servidor")
     controller.add(request, response)
 })
 
@@ -22,7 +21,11 @@ cliente.get('/nome/:nome', (request, response) => {
     controller.findNome(request, response)
 })
 
-cliente.put('/cliente/:cliente', (request, response) => {
+cliente.put('/:id', (request, response) => {
     controller.update(request, response)
+})
+
+cliente.delete('/:id', (request, response) => {
+    controller.delete(request, response)
 })
 

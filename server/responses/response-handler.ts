@@ -7,9 +7,17 @@ export class ResponseHandler {
         res.status(HTTPStatus.OK).json(data);
     }
 
-    public onError(res: Response,  err: any, message: string,) {
+    public onSuccessNoContent(res: Response) {
+        res.status(HTTPStatus.NO_CONTENT).end();
+    }
+
+    public onError(res: Response, err: any, message: string, ) {
         console.log(`Error: ${err}`);
         res.status(HTTPStatus.INTERNAL_SERVER_ERROR).send(message)
+    }
+
+    public onErrorBadRequest(res: Response, message: string, ) {
+        res.status(HTTPStatus.BAD_REQUEST).send(message)
     }
 }
 

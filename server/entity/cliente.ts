@@ -1,7 +1,6 @@
 import { Entity } from './entity'
 
 export interface Endereco {
-    id: number;
     rua: string;
     numeroResidencia: string;
     bloco: string;

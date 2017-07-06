@@ -1,0 +1,46 @@
+show dbs // monstra todos bancos
+use nome-banco //escolhe o banco de dados
+show.collections // mostra todas as coleções do banco 
+db.dropDatabase() // Delete o banco de dados que esta sendo usado
+
+Cria o banco e a coleção na primeira iserção que for feito
+
+
+db.clientes.find().pretty() // retorna os clientes
+db.clientes.remove({nome: "Jackson"}) //remove todos com nome jackson
+
+db.clientes.insert({
+            "nome": "Maria da Silva",
+            "cpf": "00000000000",
+            "sexo": "Senhora",
+            "dataNascimento": "02/02/1997",
+            "telefones": [
+                {
+                    "numero": "47999999999"
+                },
+                 {
+                    "numero": "47888888888"
+                }
+            ],
+            "enderecos": [
+                {
+                    "rua": "Antonio da Silva",
+                    "numeroResidencia": "500",
+                    "bairro": "São João",
+                    "cidade": "Itajaí",
+                    "estado": "SC"
+                },
+                {
+                    "rua": "Augusto da Rosa",
+                    "numeroResidencia": "600",
+                    "bairro": "Cordeiros",
+                    "cidade": "Itajaí",
+                    "estado": "SC"
+                }
+            ]
+        })
+
+//POST
+não esquecer de enviar com id
+
+

@@ -20,8 +20,6 @@ export class CRUD<TEntity extends Entity> {
     public list(request: Request, response: Response): void {
         this.service.list()
             .then(dado => {
-            //   const clienteViewModel = new ClienteInterface();
-              //  const teste = clienteViewModel.createClientes(dado);
                 this.responseHandler.onSuccess(response, dado)
             })
             .catch(error => {
@@ -62,12 +60,27 @@ export class CRUD<TEntity extends Entity> {
 
     public update(request: Request, response: Response): void {
         const dado = request.body as TEntity;
+        if (dado._id !== request.params.id) {
+            this.responseHandler.onErrorBadRequest(response, `Erro ao atualizar ${this.tipo}`)
+        }
         this.service.update(dado)
             .then(dado => {
-                this.responseHandler.onSuccess(response, dado)
+                this.responseHandler.onSuccessNoContent(response)
             })
             .catch(error => {
-                this.responseHandler.onError(response, error, `Erro ao pesquisar ${this.tipo}`)
+                this.responseHandler.onError(response, error, `Erro ao atualizar ${this.tipo}`)
             })
     }
+
+    public delete(request: Request, response: Response): void {
+        const id =  request.params.id;
+        this.service.delete(id)
+            .then(dado => {
+                this.responseHandler.onSuccessNoContent(response)
+            })
+            .catch(error => {
+                this.responseHandler.onError(response, error, `Erro ao atualizar ${this.tipo}`)
+            })
+    }
+
 }

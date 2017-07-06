@@ -11,13 +11,15 @@ exports.cliente.get('/:id', function (request, response) {
     controller.find(request, response);
 });
 exports.cliente.post('/', function (request, response) {
-    console.log("entrou no post do servidor");
     controller.add(request, response);
 });
 exports.cliente.get('/nome/:nome', function (request, response) {
     controller.findNome(request, response);
 });
-exports.cliente.put('/cliente/:cliente', function (request, response) {
+exports.cliente.put('/:id', function (request, response) {
     controller.update(request, response);
+});
+exports.cliente.delete('/:id', function (request, response) {
+    controller.delete(request, response);
 });
 //# sourceMappingURL=cliente.js.map

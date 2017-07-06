@@ -5,7 +5,7 @@ import Bluebird = require("bluebird");
 (<any>mongoose).Promise = Bluebird;
 
 
-connect('localhost:27017/e-commerce')
+connect('localhost:27017/pet')
     .then(() => {
         console.log('conectado ao banco de dados')
         app.listen(8080, () => {

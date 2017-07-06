@@ -13,9 +13,7 @@ export class CRUD<TEntity extends Entity> {
     }
 
     public find(id: number): Promise<TEntity | undefined> {
-        console.log("repository find Cliente")
-        console.log(id)
-        return this.model.findOne({_id: id })
+        return this.model.findOne({ _id: id })
     }
 
     public add(entity: TEntity): Promise<TEntity> {
@@ -27,8 +25,11 @@ export class CRUD<TEntity extends Entity> {
         return this.model.find({ nome: nome })
     }
 
-    public update(dado: TEntity): Promise<TEntity | undefined> {
-        console.log("repository update Cliente")
-        return this.model.findByIdAndUpdate(dado.id, dado)
+    public update(dado: TEntity): Promise<TEntity> {
+        return this.model.findByIdAndUpdate(dado._id, dado)
+    }
+
+    public delete(id: string): Promise<void> {
+        return this.model.remove({_id: id})
     }
 }

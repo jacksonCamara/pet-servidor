@@ -2,6 +2,7 @@ import { model, Schema, Document } from 'mongoose'
 import { Cliente as ClienteEntity } from '../entity/cliente';
 
 const EnderecoSchema = new Schema({
+    cep: {type: String},
     rua: { type: String },
     numeroResidencia: { type: String },
     bloco: { type: String },
@@ -29,53 +30,43 @@ const schema = new Schema({
 
 
 
-export const Cliente = model<ClienteEntity & Document>('Cliente', schema)
+export const Cliente = model<ClienteEntity & Document>('cliente', schema)
      /*
 const cliente = new Cliente(
-    {
-            "nome": "Jackson Camara",
-            "email": "aaaaaaa",
-            "password": "aaaaaaa",
+            {
+            "nome": "Maria da Silva",
+            "cpf": "00000000000",
+            "sexo": "f",
+            "dataNascimento": "02/02/1997",
             "telefones": [
                 {
-                    "numero": "aaaaaaa"
+                    "numero": "47999999999"
                 },
                  {
-                    "numero": "aaaaaaa"
-                },
-                {
-                    "numero": "aaaaaaa"
+                    "numero": "47888888888"
                 }
             ],
             "enderecos": [
                 {
-                    "rua": "aaaeuua",
-                    "numeroResidencia": "aaaaaaa",
-                    "bairro": "aaaaaaa",
-                    "cidade": "aaaaaaa",
-                    "estado": "aaaaaaa"
+                    "rua": "Antonio da Silva",
+                    "numeroResidencia": "500",
+                    "bairro": "São João",
+                    "cidade": "Itajaí",
+                    "estado": "SC"
                 },
                 {
-                    "rua": "aaaaaaa",
-                    "numeroResidencia": "aaaaaaa",
-                    "bairro": "aaaaaaa",
-                    "cidade": "aaaaaaa",
-                    "estado": "aaaaaaa"
+                    "rua": "Augusto da Rosa",
+                    "numeroResidencia": "600",
+                    "bairro": "Cordeiros",
+                    "cidade": "Itajaí",
+                    "estado": "SC"
                 }
             ]
         })
-   
-        cliente.save().then(dado =>{
-            console.log("de certo")
-            console.log(dado)
-        }).catch(error =>{
-            console.log("deu errado")
-            console.log(error)
-        })
 
 
-Cliente.find().then(c =>{
-    console.log(JSON.stringify(c))
+Cliente.find().then(cliente =>{
+    console.log(JSON.stringify(cliente))
 }).catch(error =>{
     console.log(error)
 })

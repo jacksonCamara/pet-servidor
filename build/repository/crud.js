@@ -7,8 +7,6 @@ var CRUD = (function () {
         return this.model.find();
     };
     CRUD.prototype.find = function (id) {
-        console.log("repository find Cliente");
-        console.log(id);
         return this.model.findOne({ _id: id });
     };
     CRUD.prototype.add = function (entity) {
@@ -19,8 +17,10 @@ var CRUD = (function () {
         return this.model.find({ nome: nome });
     };
     CRUD.prototype.update = function (dado) {
-        console.log("repository update Cliente");
-        return this.model.findByIdAndUpdate(dado.id, dado);
+        return this.model.findByIdAndUpdate(dado._id, dado);
+    };
+    CRUD.prototype.delete = function (id) {
+        return this.model.remove({ _id: id });
     };
     return CRUD;
 }());

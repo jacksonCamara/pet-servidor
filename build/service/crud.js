@@ -18,6 +18,9 @@ var CRUD = (function () {
     CRUD.prototype.update = function (dado) {
         return this.repository.update(dado);
     };
+    CRUD.prototype.delete = function (id) {
+        return this.repository.delete(id);
+    };
     return CRUD;
 }());
 exports.CRUD = CRUD;

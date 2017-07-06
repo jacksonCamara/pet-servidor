@@ -9,8 +9,6 @@ var CRUD = (function () {
         var _this = this;
         this.service.list()
             .then(function (dado) {
-            //   const clienteViewModel = new ClienteInterface();
-            //  const teste = clienteViewModel.createClientes(dado);
             _this.responseHandler.onSuccess(response, dado);
         })
             .catch(function (error) {
@@ -51,12 +49,26 @@ var CRUD = (function () {
     CRUD.prototype.update = function (request, response) {
         var _this = this;
         var dado = request.body;
+        if (dado._id !== request.params.id) {
+            this.responseHandler.onErrorBadRequest(response, "Erro ao atualizar " + this.tipo);
+        }
         this.service.update(dado)
             .then(function (dado) {
-            _this.responseHandler.onSuccess(response, dado);
+            _this.responseHandler.onSuccessNoContent(response);
         })
             .catch(function (error) {
-            _this.responseHandler.onError(response, error, "Erro ao pesquisar " + _this.tipo);
+            _this.responseHandler.onError(response, error, "Erro ao atualizar " + _this.tipo);
+        });
+    };
+    CRUD.prototype.delete = function (request, response) {
+        var _this = this;
+        var id = request.params.id;
+        this.service.delete(id)
+            .then(function (dado) {
+            _this.responseHandler.onSuccessNoContent(response);
+        })
+            .catch(function (error) {
+            _this.responseHandler.onError(response, error, "Erro ao atualizar " + _this.tipo);
         });
     };
     return CRUD;

@@ -25,8 +25,12 @@ export class CRUD<TEntity extends Entity> {
         return this.repository.findNome(nome)
     }
 
-    public update(dado: TEntity): Promise<TEntity[]> {
+    public update(dado: TEntity): Promise<TEntity> {
         return this.repository.update(dado)
+    }
+
+    public delete(id: string): Promise<void>{
+        return this.repository.delete(id)
     }
 
 }
